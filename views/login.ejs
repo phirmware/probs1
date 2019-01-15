@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>A Problem a Day</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Varela+Round"
+    />
+    <link rel="stylesheet" href="animate.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="img/favicon (1).ico" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div>
+      <style>
+            div.group {
+                border: 1px solid #ededed;
+                border-radius: 5px;
+                padding: 7px;
+                margin: 28px;
+                position: relative;
+                background: #fbfbfb;
+            }
+
+            input{
+                box-shadow: none;
+                appearance: none;
+                padding: 7px;
+                border: 1px solid #ededed;
+                border-radius: 5px;
+                margin: 14px;
+                font-size: 16px;
+                margin-top: 7px;
+                margin-bottom: 14px;
+                background: #ededed;
+                width: calc(100% - 28px);
+            }
+
+            div.group span.head {
+                font-weight: 800;
+                color: #444;
+                display: block;
+                margin: 16px;
+                margin-bottom: 0;
+                margin-top: 18px;
+                font-size: 16px;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+
+            .signup-btn{
+                border-radius: 5px;
+                background: red;
+                color: white;
+                font-weight: bold;
+                margin: 14px;
+            }
+
+            .group-heading {
+                background: #ededed;
+                margin-top: -20px;
+                text-transform: uppercase;
+                font-size: 14px;
+                color: #444;
+                font-weight: 800;
+                display: table;
+                padding-left: 7px;
+                padding-right: 7px;
+                position: absolute;
+                /* right: 14px; */
+                /* right: 50%; */
+                left: 50%;
+                transform: translateX(-50%);
+            }
+      </style>
+      <div class="jumbotron">
+        <h3 class="text-center text-uppercase">
+          A <span style="color:red">Problem</span> a Day
+        </h3>
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="group">
+                    <div class="group-heading">👩‍💻 Login</div>
+                    <form action="/login" method="POST">
+                        <span class="head">Username</span>
+                        <input type="text" name="username">
+                        <span class="head">Password</span>
+                        <input type="password" name="password">
+                        <button class="signup-btn btn ">Log In</button>
+                        <br>
+                        <a href="/signup" style="margin:14px;color:skyblue">Don't have an account?</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>A Problem a Day</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round" />
+  <link rel="stylesheet" href="/animate.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+    crossorigin="anonymous" />
+  <link rel="icon" href="/img/favicon (1).ico" />
+  <link rel="stylesheet" href="/bootstrap.min.css" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <div>
+    <div class="jumbotron" style="border-radius: 5px;
+      border: 1px solid #efefef;
+      background: #fff;
+      display: block;color:black">
+      <h3 class="text-center text-uppercase">
+        <%= prob.title %>
+      </h3>
+      <div class="text-center"><a href="/"><button class="btn btn-danger">back</button></a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="notice-problem-post text-center">
+      <p style="line-height: 2.5;
+        font-weight: 500;
+        font-size: 16px;">
+        <%= prob.content %>
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-9">
+        <table id="problemboard">
+          <thead>
+            <tr>
+              <th>
+                <h3 class="text-center">Comments</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="comment-box">
+            <% for(var i = 0 ; i < prob.comments.length ; i ++){ %>
+            <tr data-href="/">
+              <td class="position">
+                <a>
+                  <h2>
+                    <span style="color:red"> 👉 </span>
+                    <%= prob.comments[i].comment %>
+                  </h2>
+                </a>
+                <a href="<%= prob.comments[i].twitter_url %>">@
+                  <%= prob.comments[i].username %></a>
+              </td>
+            </tr>
+            <% } %>
+            <!-- <tr data-href="/">
+                <td class="position">
+                  <a>
+                    <h2>
+                      <span style="color:red"> 👉 </span> Lorem ipsum, dolor sit
+                      amet consectetur adipisicing elit. Fuga beatae officiis
+                      reiciendis error perferendis
+                    </h2>
+                  </a>
+                  <a href="">@phirmware</a>
+                </td>
+              </tr>
+              <tr data-href="/">
+                <td class="position">
+                  <a>
+                    <h2>
+                      <span style="color:red"> 👉 </span> Lorem ipsum, dolor sit
+                      amet consectetur adipisicing elit. Fuga beatae officiis
+                      reiciendis error perferendis velit nemo commodi iusto
+                      numquam sequi totam rerum, quos ipsam aliquam suscipit
+                      dicta minus ipsa impedit?
+                    </h2>
+                  </a>
+                  <a href="">@phirmware</a>
+                </td>
+              </tr>
+              <tr data-href="/">
+                <td class="position">
+                  <a>
+                    <h2>
+                      <span style="color:red"> 👉 </span> Lorem ipsum, dolor sit
+                      amet consectetur adipisicing elit. Fuga beatae officiis
+                      reiciendis error perferendis velit nemo commodi iusto
+                      numquam sequi totam rerum, quos ipsam aliquam suscipit
+                      dicta minus ipsa impedit?
+                    </h2>
+                  </a>
+                  <a href="">@phirmware</a>
+                </td>
+              </tr>
+              <tr data-href="/">
+                <td class="position">
+                  <a>
+                    <h2>
+                      <span style="color:red"> 👉 </span> Lorem ipsum, dolor sit
+                      amet consectetur adipisicing elit. Fuga beatae officiis
+                      reiciendis error perferendis velit
+                    </h2>
+                  </a>
+                  <a href="">@phirmware</a>
+                </td>
+              </tr>
+              <tr data-href="/">
+                <td class="position">
+                  <a>
+                    <h2>
+                      <span style="color:red"> 👉 </span> Lorem ipsum, dolor sit
+                      amet consectetur adipisicing elit. Fuga beatae officiis
+                      reiciendis error perferendis velit
+                    </h2>
+                  </a>
+                  <a href="">@phirmware</a>
+                </td>
+              </tr> -->
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-4 col-md-3 big">
+        <a href="https://phirmware.host" target="blank">
+          <div class="text-center" style="background: #fbfbfb;width: 100%;position:relative;display:table;margin:0 auto;top: 58px;border-radius:  5px;">
+            <img src="/img/singout.jpeg" style="object-fit:cover;border-radius:100%;width:200px;height:200px;margin:10px;" />
+            <style>
+              .ad {
+                  color: black;
+                  opacity: 1;
+                  font-size: 18px;
+                  line-height: 2;
+                  padding-left: 28px;
+                  padding-right: 28px;
+                }
+              </style>
+            <p class="ad">
+              Know what music people around you are listening to, upload and
+              join the fun.
+            </p>
+          </div>
+        </a>
+        <br />
+        <a href="https://gigslot.info" target="blank">
+          <div class="text-center" style="background: #fbfbfb;width: 100%;position:relative;display:table;margin:0 auto;top: 58px;border-radius:  5px;">
+            <img src="/img/favicon (2).png" style="object-fit:cover;border-radius:100%;width:200px;height:200px;margin:10px;" />
+            <p class="ad">Find available tech jobs in africa.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <style>
+    .comment-btn {
+        position: fixed;
+        left: 10px;
+        bottom: 0px;
+        background: #ff4742;
+        border: 2px solid #ff4742;
+        color: #fff;
+        margin: 0.5em;
+        border-radius: 5px;
+        z-index: 998;
+      }
+
+      .comment-btn:hover{
+        background: red;
+        outline: none;
+      }
+    </style>
+  <!-- Trigger the modal with a button -->
+  <% if(currentUser){ %>
+  <button type="button" class="btn btn-danger btn-lg comment-btn" data-toggle="modal" data-target="#myModal">
+    comment
+  </button>
+  <% } else{ %>
+  <a href="/login" type="button" class="btn btn-danger btn-lg comment-btn">
+    login
+  </a>
+  <% } %>
+  <style>
+    .modal-header{
+          border-bottom: none;
+        }
+
+        .modal-footer{
+          border-top: none;
+        }
+    </style>
+  <!-- Modal -->
+  <div class="modal fade animated pulse faster" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+          <h4 class="modal-title">Make Comment</h4>
+        </div>
+        <div class="modal-body">
+          <textarea required name="" id="comment" cols="30" rows="5" style="
+            width:  100%;
+            border: 1px solid black;
+            border-radius:  5px;
+            outline:  none;
+            padding:  5px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        "></textarea>
+          <style>
+            .send-btn{
+              position: fixed;
+              left: 10px;
+              background: #ff4742;
+              border: 2px solid #ff4742;
+              color: #fff;
+              margin: 0.5em;
+              border-radius: 5px;
+          }
+        </style>
+          <button class="send-btn" id="send-comment">Send</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="https://twitter.com/phirmware" target="blank" class="by">
+    <img src="/img/original.jpeg" alt="" />
+    <p>by phirmware</p>
+  </a>
+  <script src="/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+  <script src="/bootstrap.min.js"></script>
+  <script>
+    var socket = io();
+
+
+    $('#send-comment').click(() => {
+      var comment = $('#comment').val();
+      $.post('/api/problem/<%= prob._id %>', {
+        comment: comment
+      }).then(res => {
+        if (res['statusCode'] == 200) {
+          $('#comment').val('');
+          $('#comment-box').append(`
+            <tr data-href="/">
+                <td class="position">
+                  <a>
+                    <h2>
+                      <span style="color:red"> 👉 </span> 
+                      ${comment}
+                    </h2>
+                  </a>
+                  <a href="${res['twitter_url']}">@${res['username']}</a>
+                </td>
+              </tr>
+            `)
+        }
+      })
+    });
+
+
+    socket.on('new_comment', function () {
+      $.get('/api/problem/<%= prob._id %>').then(res => {
+        document.getElementById('comment-box').innerHTML = "";
+        for (var i = 0; i < res.length; i++) {
+          $('#comment-box').append(`<tr data-href="/">
+              <td class="position">
+                <a>
+                  <h2>
+                    <span style="color:red"> 👉 </span>
+                    ${res[i].comment}
+                  </h2>
+                </a>
+                <a href="${res[i].twitter_url}">@
+                  ${res[i].username}</a>
+              </td>
+            </tr>`);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

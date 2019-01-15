@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>A Problem a Day</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round" />
+  <link rel="stylesheet" href="animate.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+    crossorigin="anonymous">
+  <link rel="icon" href="img/favicon (1).ico">
+  <link rel="stylesheet" href="bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div>
+    <style>
+      .btn-post{
+          background: #ff4742;
+          border: 2px solid #ff4742;
+          color: #fff;
+          font-weight: bold;
+          margin: 0.5em;
+          border-radius: 5px;
+          top: 1em;
+          margin: 0;
+          right: 1em;
+          z-index: 10;
+          position: fixed;
+        }
+      </style>
+    <div class="jumbotron">
+      <% if(currentUser){ %>
+      <a class="btn btn-danger btn-post" data-toggle="modal" data-target="#myModal">Post</a>
+      <% } else{ %>
+      <a href="/login" class="btn btn-danger btn-post">Login</a>
+      <% } %>
+      <h3 class="text-center text-uppercase">A <span style="color:red">Problem</span> a Day</h3>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="notice-problem-post text-center">
+      <p>
+        Daily discussions of problems you find funny, helpful or inspirational.Feel free to post and join the
+        discussion . <span style="border-bottom:2px solid #000;color:red">Look Out !</span> , you might just get your
+        next big idea from here.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <table id="problemboard">
+          <thead>
+            <tr>
+              <th>
+                <h3 class="text-center">Recent</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="probs_table">
+            <% for(var i = probs.length - 1 ; i >= 0 ; i-- ){ %>
+            <tr data-href="/">
+              <td class="image text-center">
+                <a href="">
+                  <div class="logo" style="background-image:url('img/favicon (1).png')"></div>
+                </a>
+              </td>
+              <td class="position big">
+                <a href="/problem/<%= probs[i]._id %>">
+                  <h2><%= probs[i].title %></h2>
+                </a> <br />
+                <a href="<%= probs[i].twitter_url %>">Posted by- <%= probs[i].username %></a>
+                <span class="location"><%= probs[i].country %></span>
+              </td>
+              <td class="position position_mobile">
+                <a href="/problem/<%= probs[i]._id%>">
+                  <h2>A problem finding a problem</h2>
+                </a>
+                <% for(var n = 0; n < probs[i].genres.length ; n ++){ %>
+                <a href="">
+                  <div class="tag tag-consulting">
+                    <h3><%= probs[i].genres[n] %></h3>
+                  </div>
+                </a>
+                <% } %>
+                <a href="<%= probs[i].twitter_url %>">
+                  <h3>Posted by- <%= probs[i].username %></h3>
+                </a> <br />
+                <a href="">
+                  <div class="tag"></div>
+                </a>
+              </td>
+              <td class="tags big">
+                  <% for(var n = 0; n < probs[i].genres.length ; n ++){ %>
+                    <a href="">
+                      <div class="tag tag-consulting">
+                        <h3><%= probs[i].genres[n] %></h3>
+                      </div>
+                    </a>
+                    <% } %>
+              </td>
+              <td class="time"><a href=""><a href=""><span style="color:red;font-weight:bolder">📎</span> 9h</a></td>
+              <!-- <td class="source">
+                    <a href="" target="_new" class="no-border tooltip">
+                        <div target="_new" class="apply_button">
+                            <p>Join</p>
+                        </div>
+                    </a>
+                </td> -->
+            </tr>
+            <% } %>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container valuation-float">
+    <i class="fas fa-times action-close-catch-emails"></i>
+    <h4 class="text-center" style="font-weight:bolder">Get notified about top discussions <input type="text" class="subscribe"
+        placeholder="Email"><button class="btn button">Submit</button></h4>
+    <div class="text-center"></div>
+
+
+  </div>
+  <a href="https://twitter.com/phirmware" target="blank" class="by">
+    <img src="img/original.jpeg" alt="">
+    <p>by phirmware</p>
+  </a>
+  <style>
+    .modal-header{
+          border-bottom: none;
+        }
+
+        .modal-footer{
+          border-top: none;
+        }
+    </style>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+          <h4 class="modal-title">Post a Problem</h4>
+        </div>
+        <div class="modal-body">
+          <form action="/problem" method="POST">
+          <input placeholder="Title" name="title" type="text" class="post-title">
+          <input placeholder="Genres Seperated by commas" name="genres" type="text" class="post-title">
+          <input placeholder="Country" type="text" name="country" class="post-title">
+          <textarea placeholder="Content" id="post_content" name="content" id="" cols="30" rows="5" style="
+              width:  100%;
+              border: 1px solid black;
+              border-radius:  5px;
+              outline:  none;
+              padding:  5px;
+              font-weight: bold;
+              letter-spacing: 1px;
+          "></textarea>
+          <style>
+            .send-btn{
+                position: fixed;
+                left: 10px;
+                background: #ff4742;
+                border: 2px solid #ff4742;
+                color: #fff;
+                margin: 0.5em;
+                border-radius: 5px;
+            }
+
+            .post-title{
+              width: 100%;
+              border-radius: 5px;
+              letter-spacing: 1px;
+              padding: 5px;
+              font-weight: bold;
+              border: 1px solid black;
+              margin-bottom: 5px;
+            }
+          </style>
+          <button class="send-btn" id="post_btn">Send</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script>
+    $('.action-close-catch-emails').click(() => {
+      $('.valuation-float').addClass('animated fadeOutDown fast');
+    });
+  </script>
+</body>
+
+</html>
