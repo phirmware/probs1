@@ -73,37 +73,49 @@
               </td>
               <td class="position big">
                 <a href="/problem/<%= probs[i]._id %>">
-                  <h2><%= probs[i].title %></h2>
+                  <h2>
+                    <%= probs[i].title %>
+                  </h2>
                 </a> <br />
-                <a href="https://twitter.com/<%= probs[i].twitter_url %>">Posted by- <%= probs[i].username %></a>
-                <span class="location"><%= probs[i].country %></span>
+                <a href="https://twitter.com/<%= probs[i].twitter_url %>">Posted by-
+                  <%= probs[i].username %></a>
+                <span class="location">
+                  <%= probs[i].country %></span>
               </td>
               <td class="position position_mobile">
                 <a href="/problem/<%= probs[i]._id%>">
-                  <h2><%= probs[i].title %></h2>
+                  <h2>
+                    <%= probs[i].title %>
+                  </h2>
                 </a>
                 <% for(var n = 0; n < probs[i].genres.length ; n ++){ %>
                 <a href="">
                   <div class="tag tag-consulting">
-                    <h3><%= probs[i].genres[n] %></h3>
+                    <h3>
+                      <%= probs[i].genres[n] %>
+                    </h3>
                   </div>
                 </a>
                 <% } %>
                 <a href="https://twitter.com/<%= probs[i].twitter_url %>">
-                  <h3>Posted by- <%= probs[i].username %></h3>
+                  <h3>Posted by-
+                    <%= probs[i].username %>
+                  </h3>
                 </a> <br />
                 <a href="">
                   <div class="tag"></div>
                 </a>
               </td>
               <td class="tags big">
-                  <% for(var n = 0; n < probs[i].genres.length ; n ++){ %>
-                    <a href="">
-                      <div class="tag tag-consulting">
-                        <h3><%= probs[i].genres[n] %></h3>
-                      </div>
-                    </a>
-                    <% } %>
+                <% for(var n = 0; n < probs[i].genres.length ; n ++){ %>
+                <a href="">
+                  <div class="tag tag-consulting">
+                    <h3>
+                      <%= probs[i].genres[n] %>
+                    </h3>
+                  </div>
+                </a>
+                <% } %>
               </td>
               <td class="time"><a href=""><a href=""><span style="color:red;font-weight:bolder">📎</span> 9h</a></td>
               <!-- <td class="source">
@@ -115,7 +127,7 @@
                 </td> -->
             </tr>
             <% } %>
-            
+
           </tbody>
         </table>
       </div>
@@ -124,7 +136,7 @@
   <div class="container valuation-float">
     <i class="fas fa-times action-close-catch-emails"></i>
     <h4 class="text-center" style="font-weight:bolder">Get notified about top discussions <input type="text" class="subscribe"
-        placeholder="Email"><button class="btn button">Submit</button></h4>
+        placeholder="Email" id="email"><button class="btn button" id="subscribe-btn">Submit</button></h4>
     <div class="text-center"></div>
 
 
@@ -154,10 +166,10 @@
         </div>
         <div class="modal-body">
           <form action="/problem" method="POST">
-          <input placeholder="Title" name="title" type="text" class="post-title">
-          <input placeholder="Genres Seperated by commas" name="genres" type="text" class="post-title">
-          <input placeholder="Country" type="text" name="country" class="post-title">
-          <textarea placeholder="Content" id="post_content" name="content" id="" cols="30" rows="5" style="
+            <input placeholder="Title" required name="title" type="text" class="post-title">
+            <input placeholder="Genres Seperated by commas" required name="genres" type="text" class="post-title">
+            <input placeholder="Country" type="text" name="country" required class="post-title">
+            <textarea placeholder="Content" id="post_content" name="content" required id="" cols="30" rows="5" style="
               width:  100%;
               border: 1px solid black;
               border-radius:  5px;
@@ -166,8 +178,8 @@
               font-weight: bold;
               letter-spacing: 1px;
           "></textarea>
-          <style>
-            .send-btn{
+            <style>
+              .send-btn{
                 position: fixed;
                 left: 10px;
                 background: #ff4742;
@@ -187,7 +199,7 @@
               margin-bottom: 5px;
             }
           </style>
-          <button class="send-btn" id="post_btn">Send</button>
+            <button class="send-btn" id="post_btn">Send</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -199,11 +211,86 @@
     </div>
   </div>
   <script src="jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
   <script src="bootstrap.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <script>
     $('.action-close-catch-emails').click(() => {
       $('.valuation-float').addClass('animated fadeOutDown fast');
     });
+
+    var socket = io();
+
+    socket.on('new_post', function () {
+      $.get('/api/problem').then(res => {
+        console.log(res);
+        document.getElementById('probs_table').innerHTML = "";
+        for (var i = 0; i < res.length; i++) {
+          $('#probs_table').append(`
+          <tr data-href="/">
+              <td class="image text-center">
+                <a href="">
+                  <div class="logo" style="background-image:url('img/favicon (1).png')"></div>
+                </a>
+              </td>
+              <td class="position big">
+                <a href="/problem/${res[i]._id} ">
+                  <h2>${res[i].title}</h2>
+                </a> <br />
+                <a href="https://twitter.com/${res[i].twitter_url}">Posted by- ${res[i].username}</a>
+                <span class="location">${res[i].country}</span>
+              </td>
+              <td class="position position_mobile">
+                <a href="/problem/${res[i]._id}">
+                  <h2>${res[i].title}</h2>
+                </a>
+                
+                <a href="">
+                  <div class="tag tag-consulting">
+                    <h3>${res[i].genres[0]}</h3>
+                  </div>
+                </a>
+                
+                <a href="https://twitter.com/${res[i].twitter_url}">
+                  <h3>Posted by- ${res[i].username}</h3>
+                </a> <br />
+                <a href="">
+                  <div class="tag"></div>
+                </a>
+              </td>
+              <td class="tags big">
+                 
+                    <a href="">
+                      <div class="tag tag-consulting">
+                        <h3>${res[i].genres[0]}</h3>
+                      </div>
+                    </a>
+              </td>
+              <td class="time"><a href=""><a href=""><span style="color:red;font-weight:bolder">📎</span> 9h</a></td>
+              <!-- <td class="source">
+                    <a href="" target="_new" class="no-border tooltip">
+                        <div target="_new" class="apply_button">
+                            <p>Join</p>
+                        </div>
+                    </a>
+                </td> -->
+            </tr>
+          `);
+        }
+      });
+    });
+
+
+    $('#subscribe-btn').click(() => {
+      var email = $('#email').val();
+      $.post('/api/problem/subscribe', { email: email }).then(res => {
+        $('#email').val('');
+        if (res['statusCode'] == 200) {
+          swal('successful')
+        }
+      })
+    })
   </script>
 </body>
 

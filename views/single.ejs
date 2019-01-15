@@ -252,11 +252,11 @@
 
     $('#send-comment').click(() => {
       var comment = $('#comment').val();
+      $('#comment').val('');
       $.post('/api/problem/<%= prob._id %>', {
         comment: comment
       }).then(res => {
         if (res['statusCode'] == 200) {
-          $('#comment').val('');
           $('#comment-box').append(`
             <tr data-href="/">
                 <td class="position">

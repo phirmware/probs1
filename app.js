@@ -116,6 +116,7 @@ app.post('/problem', (req, res) => {
         genres: req.body.genres.split(','),
         country: req.body.country
     }).then(prob => {
+        io.emit('new_post');
         res.redirect('/problem/' + prob._id);
     }).catch(err=>{
         res.redirect('/');
